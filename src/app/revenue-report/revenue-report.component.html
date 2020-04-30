@@ -1,0 +1,62 @@
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <form #getrevenue="ngForm" (ngSubmit)='Submit(getrevenue.value)'>
+      <table class="table">
+        <tr>
+          <th>START DATE</th>
+          <td><input type="date" name="date1" ngModel></td>
+        </tr>
+        <tr>
+          <th>END DATE</th>
+          <td><input type="date" name="date2" ngModel></td>
+        </tr>
+        <tr>
+          <th>CATEGORY</th>
+          <td>
+            <select class="btn" name="category" ngModel>
+              <option value="camping equipment">Camping Equipment</option>
+              <option value="golf equipment">Golf Equipment</option>
+              <option value="mountaineering">Mountaineering Equipment</option>
+              <option value="outdoor protection">Outdoor Protection</option>
+              <option value="personal accessories">Personal Accessories</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" class="btn btn-success" value="SUBMIT"></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <h2 class="text-danger" *ngIf="error">{{message}}</h2>
+
+  <table class="table table-striped container" *ngIf="revenuedata && revenuedata.length > 0">
+    <thead>
+      <tr>
+        <th>PERIOD</th>
+        <th>REVENUE</th>
+        <th>AMOUNT CHANGE</th>
+        <th>PERCENTAGE GROWTH</th>
+        <th>COLOR CODE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of revenuedata">
+        <td> {{r.period}}</td>
+        <td> {{r.revenue}} </td>
+        <td> {{r.change}} </td>
+        <td>{{r.percentagegrowth}}</td>
+        <td> {{r.colorcode}} </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="status">
+    <h4 *ngIf="revenuedata.length < 1">No Records Found</h4>
+  </div>
+</body>

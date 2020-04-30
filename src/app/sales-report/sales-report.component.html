@@ -1,0 +1,68 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <form #getsales="ngForm" (ngSubmit)='Submit(getsales.value)'>
+            <table class="table">
+                <tr>
+                    <th>START DATE</th>
+                    <td><input type="date" name="date1" ngModel></td>
+                </tr>
+                <tr>
+                    <th>END DATE</th>
+                    <td><input type="date" name="date2" ngModel></td>
+                </tr>
+                <tr>
+                    <th>USER ID </th>
+                    <td><input type="text" name="userid" ngModel></td>
+                </tr>
+                <tr>
+                    <th>CATEGORY</th>
+                    <td>
+                        <select class="btn" name="category" ngModel>
+                            <option value="camping equipment">Camping Equipment</option>
+                            <option value="golf equipment">Golf Equipment</option>
+                            <option value="mountaineering">Mountaineering Equipment</option>
+                            <option value="outdoor protection">Outdoor Protection</option>
+                            <option value="personal accessories">Personal Accessories</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" class="btn btn-success" value="SUBMIT"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <h2 class="text-danger" *ngIf="error">{{message}}</h2>
+
+    <table class="table table-striped container" *ngIf="salesdata && salesdata.length > 0">
+        <thead>
+            <tr>
+                <th>DATE</th>
+                <th>USER ID</th>
+                <th>ORDER ID</th>
+                <th>PRODUCT ID</th>
+                <th>CATEGORY</th>
+                <th>PRICE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let d of salesdata">
+                <td> {{d.date1| date:'MMM d, y'}}</td>
+                <td> {{d.user_id}} </td>
+                <td> {{d.orderid}} </td>
+                <td>{{d.productid}}</td>
+                <td> {{d.product_category}} </td>
+                <td> {{d.product_price}} </td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="status">
+        <h4 *ngIf="salesdata.length < 1">No Records Found</h4>
+    </div>
+</body>

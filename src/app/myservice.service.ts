@@ -20,15 +20,15 @@ export class MyserviceService {
 }
 export class MyForm
 {
-  date1:String;
-  date2:String;
+  date1:Date;
+  date2:Date;
   category:String;
    userid:String;
 }
 export class RevenueTable
 {
     user_id:String;
-	  date1:String;
+	  date1:Date;
 	  orderid:number
 	 productid;number;
 	 product_category:String;

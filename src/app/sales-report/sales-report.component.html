@@ -8,19 +8,19 @@
         <form #getsales="ngForm" (ngSubmit)='Submit(getsales.value)'>
             <table class="table">
                 <tr>
-                    <th>START DATE</th>
-                    <td><input type="date" name="date1" ngModel></td>
+                    <th>Start Date</th>
+                    <td><input type="date" name="date1" ngModel required></td>
                 </tr>
                 <tr>
-                    <th>END DATE</th>
-                    <td><input type="date" name="date2" ngModel></td>
+                    <th>End Date</th>
+                    <td><input type="date" name="date2" ngModel required></td>
                 </tr>
                 <tr>
-                    <th>USER ID </th>
-                    <td><input type="text" name="userid" ngModel></td>
+                    <th>User Id </th>
+                    <td><input type="text" name="userid" ngModel required></td>
                 </tr>
                 <tr>
-                    <th>CATEGORY</th>
+                    <th>Category</th>
                     <td>
                         <select class="btn" name="category" ngModel>
                             <option value="camping equipment">Camping Equipment</option>
@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" class="btn btn-success" value="SUBMIT"></td>
+                    <td><input type="submit" class="btn btn-success" value="Submit"></td>
                 </tr>
             </table>
         </form>
@@ -43,12 +43,12 @@
     <table class="table table-striped container" *ngIf="salesdata && salesdata.length > 0">
         <thead>
             <tr>
-                <th>DATE</th>
-                <th>USER ID</th>
-                <th>ORDER ID</th>
-                <th>PRODUCT ID</th>
-                <th>CATEGORY</th>
-                <th>PRICE</th>
+                <th>Date</th>
+                <th>User Id</th>
+                <th>Order Id</th>
+                <th>Product Id</th>
+                <th>Category</th>
+                <th>Price</th>
             </tr>
         </thead>
         <tbody>
@@ -57,7 +57,7 @@
                 <td> {{d.user_id}} </td>
                 <td> {{d.orderid}} </td>
                 <td>{{d.productid}}</td>
-                <td> {{d.product_category}} </td>
+                <td> {{d.product_category|titlecase}} </td>
                 <td> {{d.product_price}} </td>
             </tr>
         </tbody>

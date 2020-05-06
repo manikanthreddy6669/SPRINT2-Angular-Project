@@ -8,17 +8,17 @@
     <form #getrevenue="ngForm" (ngSubmit)='Submit(getrevenue.value)'>
       <table class="table">
         <tr>
-          <th>START DATE</th>
-          <td><input type="date" name="date1" ngModel></td>
+          <th>Start Date</th>
+          <td><input type="date" name="date1" ngModel required></td>
         </tr>
         <tr>
-          <th>END DATE</th>
-          <td><input type="date" name="date2" ngModel></td>
+          <th>End Date</th>
+          <td><input type="date" name="date2" ngModel required></td>
         </tr>
         <tr>
-          <th>CATEGORY</th>
+          <th>Category</th>
           <td>
-            <select class="btn" name="category" ngModel>
+            <select class="btn" name="category" ngModel required>
               <option value="camping equipment">Camping Equipment</option>
               <option value="golf equipment">Golf Equipment</option>
               <option value="mountaineering">Mountaineering Equipment</option>
@@ -29,7 +29,7 @@
         </tr>
         <tr>
           <td></td>
-          <td><input type="submit" class="btn btn-success" value="SUBMIT"></td>
+          <td><input type="submit" class="btn btn-success" value="Submit"></td>
         </tr>
       </table>
     </form>
@@ -39,20 +39,20 @@
   <table class="table table-striped container" *ngIf="revenuedata && revenuedata.length > 0">
     <thead>
       <tr>
-        <th>PERIOD</th>
-        <th>REVENUE</th>
-        <th>AMOUNT CHANGE</th>
-        <th>PERCENTAGE GROWTH</th>
-        <th>COLOR CODE</th>
+        <th>Period</th>
+        <th>Revenue</th>
+        <th>Amount Change</th>
+        <th>Percentage Growth</th>
+        <th>Color Code</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let r of revenuedata">
+      <tr *ngFor="let r of revenuedata" >
         <td> {{r.period}}</td>
         <td> {{r.revenue}} </td>
         <td> {{r.change}} </td>
         <td>{{r.percentagegrowth}}</td>
-        <td> {{r.colorcode}} </td>
+        <td  [ngStyle]="{'background-color': r.colorcode == 'green' ? 'green': r.colorcode == 'blue' ? 'blue' : r.colorcode == 'red' ? 'Red' : ''}"> {{r.colorcode|titlecase}} </td>
       </tr>
     </tbody>
   </table>

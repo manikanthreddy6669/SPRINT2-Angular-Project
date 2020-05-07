@@ -54,11 +54,11 @@
         <tbody>
             <tr *ngFor="let d of salesdata">
                 <td> {{d.date1| date:'MMM d, y'}}</td>
-                <td> {{d.user_id}} </td>
+                <td> {{d.userid}} </td>
                 <td> {{d.orderid}} </td>
                 <td>{{d.productid}}</td>
-                <td> {{d.product_category|titlecase}} </td>
-                <td> {{d.product_price}} </td>
+                <td> {{d.productCategory|titlecase}} </td>
+                <td> {{d.productPrice}} </td>
             </tr>
         </tbody>
     </table>

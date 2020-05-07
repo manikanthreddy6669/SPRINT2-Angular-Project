@@ -27,12 +27,12 @@ export class MyForm
 }
 export class RevenueTable
 {
-    user_id:String;
+    userid:String;
 	  date1:Date;
 	  orderid:number
 	 productid;number;
-	 product_category:String;
-	 product_price:number;
+	 productCategory:String;
+	 productPrice:number;
 
 }
 export class RevenueReport

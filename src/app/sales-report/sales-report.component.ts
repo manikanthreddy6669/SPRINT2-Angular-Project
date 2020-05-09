@@ -8,43 +8,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./sales-report.component.css']
 })
 export class SalesReportComponent implements OnInit {
-message:any;
-salesdata:RevenueTable[];
-valid: any;
-  error: boolean;
+  message: any;
+  salesdata: RevenueTable[];
   status: boolean;
-  constructor(private myservice: MyserviceService,private router: Router) { 
-    this.status=false;
+  mstatus: boolean = false;
+  constructor(private myservice: MyserviceService, private router: Router) {
+    this.status = false;
   }
 
   ngOnInit(): void {
   }
-  Submit(SalesInput:MyForm):any{
-    console.log(SalesInput);
-    this.valid = this.validateDates(SalesInput.date1,SalesInput.date2);
-    if(this.valid)
-     this.myservice.getSalesData(SalesInput).subscribe(
+  Submit(SalesInput: MyForm): any {
+
+    this.myservice.getSalesData(SalesInput).subscribe(
       response => this.handleSuccessfulResponse(response),
     );
   }
   handleSuccessfulResponse(response) {
-    this.status=true;
+    this.status = true;
     this.salesdata = response;
   }
-  validateDates(StartDate: any, EndDate: any): any {
-    this.valid = true;
-    this.message='';
-    if(StartDate =='' || EndDate ==''){
-      this.error=true;
-      this.message='Start date and end date are required.';
-      this.valid = false;
+
+  StartDate: Date;
+  onDateChange(StartDate: Date): void {
+    this.StartDate = StartDate;
+  }
+
+  onDate2Change(EndDate: Date): void {
+    this.message = '';
+    if ((this.StartDate != null && EndDate != null) && (EndDate) < (this.StartDate)) {
+      this.message = "End date should be greater than start date";
+      this.mstatus = true;
     }
 
-    if((StartDate != null && EndDate !=null) && (EndDate) < (StartDate)){
-      this.error=true;
-      this.message='End date should be greater than start date';
-      this.valid = false;
-    }
-    return this.valid;
   }
-  }
+}

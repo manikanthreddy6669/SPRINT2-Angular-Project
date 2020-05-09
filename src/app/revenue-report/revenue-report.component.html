@@ -9,32 +9,46 @@
       <table class="table">
         <tr>
           <th>Start Date</th>
-          <td><input type="date" name="date1" ngModel required></td>
+          <td><input type="date" name="date1" #Date1Ref='ngModel' (change)="onDateChange($event.target.value)" ngModel
+              required>
+            <h4 *ngIf='(Date1Ref.errors && Date1Ref.touched)' class="alert alert-danger">
+              Start Date is Required
+            </h4>
+          </td>
         </tr>
         <tr>
           <th>End Date</th>
-          <td><input type="date" name="date2" ngModel required></td>
+          <td><input type="date" name="date2" #Date2Ref='ngModel' (change)="onDate2Change($event.target.value)" ngModel
+              required>
+            <h4 *ngIf='Date2Ref.errors && Date2Ref.touched' class="alert alert-danger">
+              End Date is Required
+            </h4>
+            <h3 *ngIf="mstatus && message.length>0" class="alert alert-danger">{{message}}</h3>
+          </td>
         </tr>
         <tr>
           <th>Category</th>
           <td>
-            <select class="btn" name="category" ngModel required>
+            <select class="btn" name="category" #categoryRef='ngModel' ngModel required>
               <option value="camping equipment">Camping Equipment</option>
               <option value="golf equipment">Golf Equipment</option>
               <option value="mountaineering">Mountaineering Equipment</option>
               <option value="outdoor protection">Outdoor Protection</option>
               <option value="personal accessories">Personal Accessories</option>
             </select>
+            <h4 *ngIf='categoryRef.errors && categoryRef.touched' class="alert alert-danger">
+              UserId is required
+            </h4>
           </td>
         </tr>
         <tr>
           <td></td>
-          <td><input type="submit" class="btn btn-success" value="Submit"></td>
+          <td><input [disabled]="getrevenue.invalid" type="submit" value="Submit" class="btn btn-success">
+          </td>
         </tr>
       </table>
     </form>
   </div>
-  <h2 class="text-danger" *ngIf="error">{{message}}</h2>
 
   <table class="table table-striped container" *ngIf="revenuedata && revenuedata.length > 0">
     <thead>
@@ -47,16 +61,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let r of revenuedata" >
+      <tr *ngFor="let r of revenuedata">
         <td> {{r.period}}</td>
         <td> {{r.revenue}} </td>
         <td> {{r.change}} </td>
         <td>{{r.percentagegrowth}}</td>
-        <td  [ngStyle]="{'background-color': r.colorcode == 'green' ? 'green': r.colorcode == 'blue' ? 'blue' : r.colorcode == 'red' ? 'Red' : ''}"> {{r.colorcode|titlecase}} </td>
+        <td
+          [ngStyle]="{'background-color': r.colorcode == 'green' ? 'green': r.colorcode == 'blue' ? 'blue' : r.colorcode == 'red' ? 'Red' : ''}">
+          {{r.colorcode|titlecase}} </td>
       </tr>
     </tbody>
   </table>
   <div *ngIf="status">
-    <h4 *ngIf="revenuedata.length < 1">No Records Found</h4>
+    <h4 *ngIf="revenuedata.length < 1" align="center">No Records Found</h4>
   </div>
 </body>
